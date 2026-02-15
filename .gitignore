@@ -1,0 +1,12 @@
+# general
+*.pth
+.DS_Store
+
+# Python virtual environment
+.venv/
+venv/
+ENV/
+
+# General Python junk
+__pycache__/
+*.py[cod]
