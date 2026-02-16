@@ -79,6 +79,12 @@ agent_builder.add_edge("tool_node", "llm_call")
 
 agent = agent_builder.compile()
 
+from IPython.display import Image, display
+png_data = agent.get_graph(xray=True).draw_mermaid_png()
+with open("graph.png", "wb") as f:
+    f.write(png_data)
+print("graph has been saved.")
+
 messages = [HumanMessage(content="please add three and 4")]
 messages = agent.invoke({"messages":messages})
 for m in messages["messages"]:
