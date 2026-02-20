@@ -85,7 +85,7 @@ with open("graph.png", "wb") as f:
     f.write(png_data)
 print("graph has been saved.")
 
-messages = [HumanMessage(content="please add three and 4")]
+messages = [HumanMessage(content="please add three and 4, then add 3 and 3, then find the product of these 2")]
 messages = agent.invoke({"messages":messages})
 for m in messages["messages"]:
     print("\n\n")
