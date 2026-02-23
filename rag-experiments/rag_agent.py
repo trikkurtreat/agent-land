@@ -31,10 +31,14 @@ vector_store = PGVector(
 
 # _ = vector_store.add_documents(all_splits)
 
-@tool("retrieve_documents", description="retrieves the most relevant 2 docuements from the vector store given a query")
+@tool("retrieve_documents", description="retrieves the most relevant 2 docuements from the vector store given a query", response_format='content_and_artifact')
 def retrieve_documents(query : str):
-    results = vector_store.similarity_search(query)
-    return '\n\n || Here is another document : || \n\n'.join([d.page_content for d in results])
+    results = vector_store.similarity_search(query, k = 2)
+    serialized = "\n\n".join(
+        (f"\n source : {doc.metadata} \n content : {doc.page_content} \n")
+        for doc in results
+    )
+    return serialized, results
 
 model = init_chat_model(model = 'claude-haiku-4-5-20251001', temperature = '0.5')
 tools = [retrieve_documents]
