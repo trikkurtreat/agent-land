@@ -1,0 +1,16 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: getbud_db_vec
+    restart: always
+    environment:
+      POSTGRES_USER: adi_admin
+      POSTGRES_PASSWORD: adi_admin
+      POSTGRES_DB: getbud
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
